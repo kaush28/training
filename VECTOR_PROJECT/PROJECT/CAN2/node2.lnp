@@ -1,0 +1,5 @@
+"spi.obj",
+"canfun.obj",
+"main.obj" 
+TO "node2" 
+RAMSIZE(256) 

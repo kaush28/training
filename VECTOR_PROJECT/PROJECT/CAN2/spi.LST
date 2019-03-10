@@ -1,0 +1,77 @@
+C51 COMPILER V9.02   SPI                                                                   10/19/2015 19:45:48 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE SPI
+OBJECT MODULE PLACED IN C:\v14he9k1\spi.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE spi.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\v14he9k1\spi.obj)
+
+line level    source
+
+   1          #include"headers.h"
+   2          /* SPI initialization func*/
+   3          void Init_SPI(void)
+   4          {
+   5   1       SPCTL=0x50;
+   6   1       cs=deselect;
+   7   1      }
+   8          
+   9          /* SPI transfer fun def*/
+  10          u8 SPI(u8 c)
+  11          {
+  12   1       SPCFG&=0x00;
+  13   1       SPDAT=c;
+  14   1       while(!(SPCFG));
+  15   1       return(SPDAT);
+  16   1      }
+  17          
+  18          /* funct to send command to mcp2515  */
+  19          void CMD_2515(u8 CMD)
+  20          {
+  21   1       cs=select;
+  22   1       SPI(CMD);
+  23   1       cs=deselect;
+  24   1      }
+  25          
+  26          void modify_2515(u8 addr,u8 mask,u8 ch)
+  27          {
+  28   1       cs=select;
+  29   1       SPI(CMD_MODIFY);
+  30   1       SPI(addr);
+  31   1       SPI(mask);
+  32   1       SPI(ch);
+  33   1       cs=deselect;
+  34   1      }
+  35          void BW_2515(u8 addr,u8 ch)
+  36          {
+  37   1       cs=select;
+  38   1       SPI(CMD_WRITE);
+  39   1       SPI(addr);
+  40   1       SPI(ch);
+  41   1       cs=deselect;
+  42   1      }
+  43          u8 BR_2515(u8 addr)
+  44          {
+  45   1       u8 ch;
+  46   1       cs=select;
+  47   1       SPI(CMD_READ);
+  48   1       SPI(addr);
+  49   1       ch=SPI(0xff);
+  50   1       cs=deselect;
+  51   1       return ch;
+  52   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.02   SPI                                                                   10/19/2015 19:45:48 PAGE 2   
+
+   CODE SIZE        =     91    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

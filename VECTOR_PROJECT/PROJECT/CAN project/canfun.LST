@@ -1,0 +1,144 @@
+C51 COMPILER V9.02   CANFUN                                                                10/19/2015 20:05:05 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE CANFUN
+OBJECT MODULE PLACED IN C:\v14he9k1\canfun.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE canfun.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\v14he9k1\canfun.obj)
+
+line level    source
+
+   1          #include"headers.h"
+   2          char flg;
+   3          
+   4          //structure to hold the ID and data for transmitting
+   5          
+   6          struct _TXBX_Buffer
+   7          {
+   8                  u8 IS_RTR; //remote transmitt bit
+   9                  u16 TX_ID; //ID
+  10                  u8 TX_Len; //to hold the data length
+  11                  u8 TXBnD0;
+  12                  u8 TX_Data[8];
+  13          }TXBX_Buffer;
+  14          
+  15          /* ISR ROUTINE */
+  16          void EXTINT0(void)interrupt 0
+  17          {
+  18   1              flg=1;
+  19   1              IE0=0; //clear interrupt
+  20   1      }
+  21          
+  22          /* INTERRUPT INITIALIZATION FUNCTION*/
+  23          
+  24          void init_ext(void)
+  25          {
+  26   1              IEN0|=0x81;
+  27   1              IT0=1;
+  28   1      }
+  29          
+  30          //delay routine for MCP2515 after reset
+  31          void RSTDelay_CANCONTROLLER(void)
+  32          {
+  33   1              u8 i;
+  34   1              for(i=70;i>0;i--);//delay for 140us
+  35   1      }
+  36          
+  37          void Init_CANCONTROLLER(void)
+  38          {
+  39   1              u8 Test_Char;
+  40   1              Init_SPI();
+  41   1              init_ext();
+  42   1              CMD_2515(CMD_RESET);//sending the reset command to the mcp2515
+  43   1              RSTDelay_CANCONTROLLER();
+  44   1              modify_2515(CANCTRL,MODE_MASK,MODE_CONFIG);//setting the mcp2515 n configure mode
+  45   1              modify_2515(CANCTRL,CLK_MASK,CLK_BITS);
+  46   1              //setting the configuration bits based on bit timming
+  47   1              BW_2515(CNF1,BRP_BITS);
+  48   1              BW_2515(CNF2,CONFIG_PSPH1);
+  49   1              BW_2515(CNF3,CONFIG_PH2);
+  50   1              BW_2515(CANINTE,INT_ENABLE); //enabling the interrupts
+  51   1              //enabling the receive buffer contrl register
+  52   1              BW_2515(RXB0CTRL,RxBuf0_Mode);
+  53   1              BW_2515(RXB1CTRL,RxBuf1_Mode);
+  54   1              modify_2515(BFPCTRL,RXPINENABLE_MASK,RXPINENABLE);
+  55   1              //checking loopback mode
+C51 COMPILER V9.02   CANFUN                                                                10/19/2015 20:05:05 PAGE 2   
+
+  56   1              do
+  57   1              {
+  58   2                      modify_2515(CANCTRL,MODE_MASK,MODE_LOOPBACK);
+  59   2      //set to loopback mode
+  60   2          Test_Char=BR_2515(CANSTAT);
+  61   2          Test_Char&=MODE_MASK;               
+  62   2              }while(Test_Char!=MODE_LOOPBACK);
+  63   1              modify_2515(CANCTRL,MODE_MASK,MODE_NORMAL);
+  64   1      }
+  65          
+  66          //functon used to write data to be transmitted to mcp2515
+  67          void WrBuf_CANCONTROLLER(struct _TXBX_Buffer *TXBn_Buffer)
+  68          {
+  69   1              u8 Res,l,i;
+  70   1              l=TXBn_Buffer->TX_Len;
+  71   1              if(TXBn_Buffer->IS_RTR==1)
+  72   1                      TXBn_Buffer->TX_Len|=0x40;//set RTR bit
+  73   1              switch(TXBn_Buffer->TXBnD0)
+  74   1        {
+  75   2                      case TXB0D0:
+  76   2                              BW_2515(TXB0SIDH,(unsigned char)((TXBn_Buffer)->TX_ID>>3)&0xff);
+  77   2                        BW_2515(TXB0SIDL,(unsigned char)((TXBn_Buffer)->TX_ID>>5)&0xE0);
+  78   2                        BW_2515(TXB0DLC,TXBn_Buffer->TX_Len);
+  79   2                      break;
+  80   2                      case TXB1D0:
+  81   2                              BW_2515(TXB1SIDH,(unsigned char)((TXBn_Buffer)->TX_ID>>3)&0xff);
+  82   2                        BW_2515(TXB1SIDL,(unsigned char)((TXBn_Buffer)->TX_ID>>5)&0xE0);
+  83   2                        BW_2515(TXB1DLC,TXBn_Buffer->TX_Len);
+  84   2                        break;
+  85   2                      case TXB2D0:
+  86   2                              BW_2515(TXB2SIDH,(unsigned char)((TXBn_Buffer)->TX_ID>>3)&0xff);
+  87   2                        BW_2515(TXB2SIDL,(unsigned char)((TXBn_Buffer)->TX_ID>>5)&0xE0);
+  88   2                        BW_2515(TXB2DLC,TXBn_Buffer->TX_Len);
+  89   2                        break;
+  90   2              }
+  91   1      cs=select;
+  92   1              if(l!=0)
+  93   1              {
+  94   2                      Res=SPI(CMD_WRITE);
+  95   2                      Res=SPI(TXBn_Buffer->TXBnD0);
+  96   2                      for(i=0;i<l;i++)
+  97   2                        Res=SPI(TXBn_Buffer->TX_Data[i]);
+  98   2      }
+  99   1      cs=deselect;
+ 100   1      }
+ 101          
+ 102          //CAN TRANSMISION FUNCTION
+ 103          void CANframe_Tx(u8 *p,u8 RTR,u16 MESSAGE_ID,u8 l)
+ 104          {
+ 105   1              TXBX_Buffer.TX_Len=1;
+ 106   1              for(;l>0;l--)
+ 107   1                TXBX_Buffer.TX_Data[l-1] = *(p+l-1);
+ 108   1              TXBX_Buffer.IS_RTR=RTR;
+ 109   1              TXBX_Buffer.TX_ID=MESSAGE_ID;
+ 110   1              TXBX_Buffer.TXBnD0=TXB0D0;
+ 111   1              WrBuf_CANCONTROLLER(&TXBX_Buffer);
+ 112   1              flg=0;
+ 113   1              CMD_2515(CMD_RTS0);
+ 114   1              while(flg==0);//waiting for the data to be transmitted 
+ 115   1              modify_2515(CANINTF,0x07,0x00);//clearing the interrupts
+ 116   1              
+ 117   1      }
+C51 COMPILER V9.02   CANFUN                                                                10/19/2015 20:05:05 PAGE 3   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    580    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,437 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/19/2015  19:45:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE C:\v14he9k1\spi.obj, C:\v14he9k1\canfun.obj, C:\v14he9k1\main.obj TO C:\v14he9k1\node2 PRINT (.
+>> \node2.m51) RAMSIZE (256) CODE (0X0000-0XFFFF)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  C:\v14he9k1\spi.obj (SPI)
+  C:\v14he9k1\canfun.obj (CANFUN)
+  C:\v14he9k1\main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CSTPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CSTOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?IILDOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ISTOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?IILDX)
+
+
+LINK MAP OF MODULE:  C:\v14he9k1\node2 (SPI)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000EH     UNIT         ?DT?CANFUN
+            DATA    0016H     0006H     UNIT         _DATA_GROUP_
+            DATA    001CH     0002H     UNIT         ?DT?MAIN
+            IDATA   001EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     0146H     UNIT         ?PR?_RDBUF_2515?CANFUN
+            CODE    014CH     010AH     UNIT         ?C?LIB_CODE
+            CODE    0256H     0070H     UNIT         ?PR?INIT_CANCONTROLLER?CANFUN
+            CODE    02C6H     0026H     UNIT         ?PR?CAN_RX?CANFUN
+            CODE    02ECH     001AH     UNIT         ?PR?MAIN?MAIN
+            CODE    0306H     0018H     UNIT         ?PR?_MODIFY_2515?SPI
+            CODE    031EH     0013H     UNIT         ?PR?_BW_2515?SPI
+            CODE    0331H     0011H     UNIT         ?PR?_SPI?SPI
+            CODE    0342H     0011H     UNIT         ?PR?_BR_2515?SPI
+            CODE    0353H     000CH     UNIT         ?C_C51STARTUP
+            CODE    035FH     0008H     UNIT         ?PR?_CMD_2515?SPI
+            CODE    0367H     0006H     UNIT         ?PR?INIT_SPI?SPI
+            CODE    036DH     0006H     UNIT         ?PR?EXTINT0?CANFUN
+            CODE    0373H     0006H     UNIT         ?PR?INIT_EXT?CANFUN
+            CODE    0379H     0005H     UNIT         ?PR?RSTDELAY_CANCONTROLLER?CANFUN
+
+
+
+OVERLAY MAP OF MODULE:   C:\v14he9k1\node2 (SPI)
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/19/2015  19:45:49  PAGE 2
+
+
+
+SEGMENT                                     DATA_GROUP 
+  +--> CALLED SEGMENT                     START    LENGTH
+---------------------------------------------------------
+?C_C51STARTUP                             -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                             -----    -----
+  +--> ?PR?INIT_CANCONTROLLER?CANFUN
+  +--> ?PR?CAN_RX?CANFUN
+
+?PR?INIT_CANCONTROLLER?CANFUN             -----    -----
+  +--> ?PR?INIT_SPI?SPI
+  +--> ?PR?INIT_EXT?CANFUN
+  +--> ?PR?_CMD_2515?SPI
+  +--> ?PR?RSTDELAY_CANCONTROLLER?CANFUN
+  +--> ?PR?_MODIFY_2515?SPI
+  +--> ?PR?_BW_2515?SPI
+  +--> ?PR?_BR_2515?SPI
+
+?PR?_CMD_2515?SPI                         -----    -----
+  +--> ?PR?_SPI?SPI
+
+?PR?_MODIFY_2515?SPI                      -----    -----
+  +--> ?PR?_SPI?SPI
+
+?PR?_BW_2515?SPI                          -----    -----
+  +--> ?PR?_SPI?SPI
+
+?PR?_BR_2515?SPI                          -----    -----
+  +--> ?PR?_SPI?SPI
+
+?PR?CAN_RX?CANFUN                         -----    -----
+  +--> ?PR?_MODIFY_2515?SPI
+  +--> ?PR?_RDBUF_2515?CANFUN
+
+?PR?_RDBUF_2515?CANFUN                    0016H    0006H
+  +--> ?PR?_BR_2515?SPI
+  +--> ?PR?_SPI?SPI
+
+
+
+SYMBOL TABLE OF MODULE:  C:\v14he9k1\node2 (SPI)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SPI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:035FH         PUBLIC        _CMD_2515
+  D:00B0H         PUBLIC        P3
+  D:00D5H         PUBLIC        SPCTL
+  D:00A8H         PUBLIC        IEN0
+  D:00E8H         PUBLIC        IEN1
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/19/2015  19:45:49  PAGE 3
+
+
+  D:00D8H         PUBLIC        CCON
+  D:00C0H         PUBLIC        WDTC
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0306H         PUBLIC        _modify_2515
+  C:0342H         PUBLIC        _BR_2515
+  C:031EH         PUBLIC        _BW_2515
+  D:00B8H         PUBLIC        IP0
+  D:00F8H         PUBLIC        IP1
+  B:0090H.4       PUBLIC        cs
+  C:0367H         PUBLIC        Init_SPI
+  D:00C8H         PUBLIC        T2CON
+  C:0336H         PUBLIC        _SPI
+  D:00AAH         PUBLIC        SPCFG
+  D:00D0H         PUBLIC        PSW
+  D:0086H         PUBLIC        SPDAT
+  -------         PROC          INIT_SPI
+  C:0367H         LINE#         3
+  C:0367H         LINE#         4
+  C:0367H         LINE#         5
+  C:036AH         LINE#         6
+  C:036CH         LINE#         7
+  -------         ENDPROC       INIT_SPI
+  C:0331H         SYMBOL        L?0010
+  -------         PROC          L?0009
+  -------         ENDPROC       L?0009
+  C:0331H         SYMBOL        L?0010
+  -------         PROC          _SPI
+  D:0007H         SYMBOL        c
+  C:0336H         LINE#         10
+  C:0336H         LINE#         11
+  C:0336H         LINE#         12
+  C:0339H         LINE#         13
+  C:033BH         LINE#         14
+  C:033FH         LINE#         15
+  C:0341H         LINE#         16
+  -------         ENDPROC       _SPI
+  -------         PROC          _CMD_2515
+  D:0007H         SYMBOL        CMD
+  C:035FH         LINE#         19
+  C:035FH         LINE#         20
+  C:035FH         LINE#         21
+  C:0361H         LINE#         22
+  C:0364H         LINE#         23
+  C:0366H         LINE#         24
+  -------         ENDPROC       _CMD_2515
+  -------         PROC          _MODIFY_2515
+  D:0006H         SYMBOL        addr
+  D:0005H         SYMBOL        mask
+  D:0004H         SYMBOL        ch
+  C:0306H         LINE#         26
+  C:030AH         LINE#         27
+  C:030AH         LINE#         28
+  C:030CH         LINE#         29
+  C:030EH         LINE#         30
+  C:0311H         LINE#         31
+  C:0316H         LINE#         32
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/19/2015  19:45:49  PAGE 4
+
+
+  C:031BH         LINE#         33
+  C:031DH         LINE#         34
+  -------         ENDPROC       _MODIFY_2515
+  -------         PROC          _BW_2515
+  D:0005H         SYMBOL        addr
+  D:0006H         SYMBOL        ch
+  C:031EH         LINE#         35
+  C:0322H         LINE#         36
+  C:0322H         LINE#         37
+  C:0324H         LINE#         38
+  C:0329H         LINE#         39
+  C:032BH         LINE#         40
+  C:032EH         LINE#         41
+  C:0330H         LINE#         42
+  -------         ENDPROC       _BW_2515
+  -------         PROC          _BR_2515
+  D:0006H         SYMBOL        addr
+  -------         DO            
+  D:0007H         SYMBOL        ch
+  -------         ENDDO         
+  C:0342H         LINE#         43
+  C:0344H         LINE#         44
+  C:0344H         LINE#         46
+  C:0346H         LINE#         47
+  C:0348H         LINE#         48
+  C:034BH         LINE#         49
+  C:0350H         LINE#         50
+  C:0352H         LINE#         51
+  C:0352H         LINE#         52
+  -------         ENDPROC       _BR_2515
+  -------         ENDMOD        SPI
+
+  -------         MODULE        CANFUN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:0008H         PUBLIC        RXBX_Buffer
+  C:0006H         PUBLIC        _RdBuf_2515
+  D:00A8H         PUBLIC        IEN0
+  D:00E8H         PUBLIC        IEN1
+  C:036DH         PUBLIC        EXTINT0
+  D:00D8H         PUBLIC        CCON
+  C:0379H         PUBLIC        RSTDelay_CANCONTROLLER
+  D:00C0H         PUBLIC        WDTC
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:0015H         PUBLIC        flg
+  B:0088H.1       PUBLIC        IE0
+  D:00B8H         PUBLIC        IP0
+  D:00F8H         PUBLIC        IP1
+  B:0088H.0       PUBLIC        IT0
+  B:0090H.4       PUBLIC        cs
+  D:00C8H         PUBLIC        T2CON
+  C:0373H         PUBLIC        init_ext
+  C:0256H         PUBLIC        init_CANCONTROLLER
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/19/2015  19:45:49  PAGE 5
+
+
+  D:00D0H         PUBLIC        PSW
+  C:02C6H         PUBLIC        CAN_Rx
+  -------         PROC          EXTINT0
+  C:036DH         LINE#         17
+  C:036DH         LINE#         19
+  C:0370H         LINE#         20
+  C:0372H         LINE#         21
+  -------         ENDPROC       EXTINT0
+  -------         PROC          INIT_EXT
+  C:0373H         LINE#         25
+  C:0373H         LINE#         26
+  C:0373H         LINE#         27
+  C:0376H         LINE#         28
+  C:0378H         LINE#         29
+  -------         ENDPROC       INIT_EXT
+  -------         PROC          RSTDELAY_CANCONTROLLER
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:0379H         LINE#         32
+  C:0379H         LINE#         33
+  C:0379H         LINE#         35
+  C:037DH         LINE#         36
+  -------         ENDPROC       RSTDELAY_CANCONTROLLER
+  -------         PROC          INIT_CANCONTROLLER
+  -------         DO            
+  D:0007H         SYMBOL        Test_Char
+  -------         ENDDO         
+  C:0256H         LINE#         38
+  C:0256H         LINE#         39
+  C:0256H         LINE#         41
+  C:0259H         LINE#         42
+  C:025CH         LINE#         43
+  C:0261H         LINE#         44
+  C:0264H         LINE#         45
+  C:026DH         LINE#         46
+  C:0276H         LINE#         48
+  C:027DH         LINE#         49
+  C:0284H         LINE#         50
+  C:028BH         LINE#         51
+  C:0292H         LINE#         53
+  C:0299H         LINE#         54
+  C:02A0H         LINE#         55
+  C:02A9H         LINE#         58
+  C:02A9H         LINE#         59
+  C:02B2H         LINE#         61
+  C:02B7H         LINE#         62
+  C:02BAH         LINE#         63
+  C:02BDH         LINE#         64
+  -------         ENDPROC       INIT_CANCONTROLLER
+  -------         PROC          _RDBUF_2515
+  D:0016H         SYMBOL        RXBn_Buffer
+  -------         DO            
+  D:0019H         SYMBOL        Res
+  D:001AH         SYMBOL        Tmp_RXBnCTRL
+  D:001BH         SYMBOL        i
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/19/2015  19:45:49  PAGE 6
+
+
+  C:0006H         LINE#         68
+  C:000CH         LINE#         69
+  C:000CH         LINE#         71
+  C:0016H         LINE#         72
+  C:0016H         LINE#         73
+  C:0028H         LINE#         74
+  C:002FH         LINE#         75
+  C:0045H         LINE#         76
+  C:004CH         LINE#         77
+  C:0054H         LINE#         78
+  C:0057H         LINE#         79
+  C:0067H         LINE#         80
+  C:0069H         LINE#         81
+  C:006BH         LINE#         83
+  C:006BH         LINE#         84
+  C:007DH         LINE#         85
+  C:0084H         LINE#         86
+  C:009AH         LINE#         87
+  C:00A1H         LINE#         88
+  C:00A9H         LINE#         89
+  C:00ACH         LINE#         90
+  C:00BCH         LINE#         91
+  C:00C3H         LINE#         92
+  C:00C3H         LINE#         93
+  C:00CEH         LINE#         94
+  C:00D2H         LINE#         96
+  C:00D6H         LINE#         97
+  C:00E9H         LINE#         98
+  C:00F4H         LINE#         99
+  C:00F4H         LINE#         100
+  C:00F6H         LINE#         101
+  C:00FDH         LINE#         102
+  C:010FH         LINE#         103
+  C:0125H         LINE#         104
+  C:0125H         LINE#         105
+  C:012CH         LINE#         106
+  C:0145H         LINE#         107
+  C:0149H         LINE#         108
+  C:014BH         LINE#         109
+  C:014BH         LINE#         111
+  -------         ENDPROC       _RDBUF_2515
+  -------         PROC          CAN_RX
+  C:02C6H         LINE#         114
+  C:02C6H         LINE#         115
+  C:02C6H         LINE#         117
+  C:02CFH         LINE#         118
+  C:02D3H         LINE#         119
+  C:02D8H         LINE#         120
+  C:02E1H         LINE#         121
+  C:02E4H         LINE#         122
+  C:02E8H         LINE#         123
+  C:02EBH         LINE#         125
+  -------         ENDPROC       CAN_RX
+  -------         ENDMOD        CANFUN
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/19/2015  19:45:49  PAGE 7
+
+
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A0H.7       PUBLIC        LED1
+  B:00B0H.7       PUBLIC        LED2
+  D:00A8H         PUBLIC        IEN0
+  D:00E8H         PUBLIC        IEN1
+  D:00D8H         PUBLIC        CCON
+  C:02ECH         PUBLIC        main
+  D:00C0H         PUBLIC        WDTC
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00B8H         PUBLIC        IP0
+  D:00F8H         PUBLIC        IP1
+  D:001CH         PUBLIC        ch
+  D:00C8H         PUBLIC        T2CON
+  D:001DH         PUBLIC        i
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:02ECH         LINE#         5
+  C:02ECH         LINE#         6
+  C:02ECH         LINE#         7
+  C:02EFH         LINE#         8
+  C:02EFH         LINE#         9
+  C:02EFH         LINE#         10
+  C:02F2H         LINE#         11
+  C:02F7H         LINE#         12
+  C:02F7H         LINE#         13
+  C:02F9H         LINE#         14
+  C:02FBH         LINE#         15
+  C:02FBH         LINE#         16
+  C:0300H         LINE#         17
+  C:0300H         LINE#         18
+  C:0302H         LINE#         19
+  C:0304H         LINE#         20
+  C:0304H         LINE#         21
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?CLDPTR
+  C:014CH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0165H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0192H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:01A4H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        ?C?IILDOPTR
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/19/2015  19:45:49  PAGE 8
+
+
+  C:01C6H         PUBLIC        ?C?IILDOPTR
+  -------         ENDMOD        ?C?IILDOPTR
+
+  -------         MODULE        ?C?ISTOPTR
+  C:0213H         PUBLIC        ?C?ISTOPTR
+  -------         ENDMOD        ?C?ISTOPTR
+
+  -------         MODULE        ?C?IILDX
+  C:0240H         PUBLIC        ?C?IILDX
+  -------         ENDMOD        ?C?IILDX
+
+Program Size: data=31.0 xdata=0 code=894
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
