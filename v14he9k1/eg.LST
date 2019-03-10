@@ -1,0 +1,30 @@
+C51 COMPILER V7.08   EG                                                                    09/12/2015 11:52:01 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE EG
+OBJECT MODULE PLACED IN eg.OBJ
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE eg.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          bdata char x[10];
+   2          main()
+   3          {
+   4   1      data int i;
+   5   1      for(i=1;i<10;i++)
+   6   1      x[i-1]=i;
+   7   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     24    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

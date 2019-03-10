@@ -1,0 +1,58 @@
+DSEG AT 30H
+STR: DS 6
+
+CSEG AT 0
+MOV R7,#2
+MOV R6,#1
+
+
+L1:
+MOV A,R7
+MOV B,R6
+MUL AB
+MOV R1,A
+MOV R0,#STR
+MOV A,R7
+ORL A,#'0'
+MOV @R0,A
+INC R0
+MOV A,#'x'
+MOV @R0,A
+INC R0
+MOV A,R6
+ORL A,#'0'
+MOV @R0,A
+INC R0
+MOV A,#'='
+MOV @R0,A
+;INC R0
+MOV A,B
+ORL A,#'0'
+;MOV @R0,A
+;INC R0
+MOV A,R1
+DA A      
+JB ACC.4,L2
+;SJMP L2
+
+L3:
+INC R0
+;INC B
+;MOV A,B                         
+ORL A,#'0'
+MOV @R0,A
+INC R6
+CJNE R6,#11,L1
+SJMP $
+
+
+L2:
+INC R0
+MOV R5,A
+INC B
+MOV A,B
+ORL A,#'0'
+MOV @R0,A
+MOV A,R5
+SJMP L3
+END

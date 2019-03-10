@@ -1,0 +1,46 @@
+A51 MACRO ASSEMBLER  REVERSE                                                              09/02/2015 10:38:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN REVERSE.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE REVERSE.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+                       2     
+0000 7FAA              3     MOV R7,#0AAH
+0002 EF                4     MOV A,R7
+0003 33                5     RLC A
+0004 9200              6     MOV 20H.0,C
+0006 33                7     RLC A
+0007 9201              8     MOV 20H.1,C
+0009 33                9     RLC A
+000A 9202             10     MOV 20H.2,C
+000C 33               11     RLC A
+000D 9203             12     MOV 20H.3,C
+000F 33               13     RLC A
+0010 9204             14     MOV 20H.4,C
+0012 33               15     RLC A
+0013 9205             16     MOV 20H.5,C
+0015 33               17     RLC A
+0016 9206             18     MOV 20H.6,C
+0018 33               19     RLC A
+0019 9207             20     MOV 20H.7,C
+001B AF20             21     MOV R7,20H
+                      22     END
+                             
+A51 MACRO ASSEMBLER  REVERSE                                                              09/02/2015 10:38:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

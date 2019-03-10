@@ -1,0 +1,95 @@
+A51 MACRO ASSEMBLER  DISPLAY                                                              09/02/2015 12:01:44 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN DISPLAY.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE DISPLAY.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     DSEG AT 30H
+0030                   2     STR: DS 11
+                       3     
+----                   4     CSEG AT 0
+0000 7F41              5     MOV R7,#'A'
+0002 8F30              6     MOV STR,R7
+                       7     
+0004 EF                8     MOV A,R7
+0005 C4                9     SWAP A
+0006 540F             10     ANL A,#0FH
+0008 4430             11     ORL A,#'0'
+000A F531             12     MOV STR+1,A
+                      13     
+000C EF               14     MOV A,R7
+000D 540F             15     ANL A,#0FH
+000F 4430             16     ORL A,#'0'
+0011 F532             17     MOV STR+2,A
+                      18     
+0013 EF               19     MOV A,R7
+0014 33               20     RLC A
+0015 9200             21     MOV 20H.0,C
+0017 532001           22     ANL 20H,#01H
+001A 432030           23     ORL 20H,#'0'
+001D 852033           24     MOV STR+3,20H
+                      25     
+0020 33               26     RLC A
+0021 9200             27     MOV 20H.0,C
+0023 532001           28     ANL 20H,#01H
+0026 432030           29     ORL 20H,#'0'
+0029 852034           30     MOV STR+4,20H
+                      31     
+002C 33               32     RLC A
+002D 9200             33     MOV 20H.0,C
+002F 532001           34     ANL 20H,#01H
+0032 432030           35     ORL 20H,#'0'
+0035 852035           36     MOV STR+5,20H
+                      37     
+0038 33               38     RLC A
+0039 9200             39     MOV 20H.0,C
+003B 532001           40     ANL 20H,#01H
+003E 432030           41     ORL 20H,#'0'
+0041 852036           42     MOV STR+6,20H
+                      43     
+0044 33               44     RLC A
+0045 9200             45     MOV 20H.0,C
+0047 532001           46     ANL 20H,#01H
+004A 432030           47     ORL 20H,#'0'
+004D 852037           48     MOV STR+7,20H
+                      49     
+0050 33               50     RLC A
+0051 9200             51     MOV 20H.0,C
+0053 532001           52     ANL 20H,#01H
+0056 432030           53     ORL 20H,#'0'
+0059 852038           54     MOV STR+8,20H
+                      55     
+005C 33               56     RLC A
+005D 9200             57     MOV 20H.0,C
+005F 532001           58     ANL 20H,#01H
+A51 MACRO ASSEMBLER  DISPLAY                                                              09/02/2015 12:01:44 PAGE     2
+
+0062 432030           59     ORL 20H,#'0'
+0065 852039           60     MOV STR+9,20H
+                      61     
+0068 33               62     RLC A
+0069 9200             63     MOV 20H.0,C
+006B 532001           64     ANL 20H,#01H
+006E 432030           65     ORL 20H,#'0'
+0071 85203A           66     MOV STR+10,20H
+                      67     
+                      68     
+                      69     END
+A51 MACRO ASSEMBLER  DISPLAY                                                              09/02/2015 12:01:44 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+STR. . . . . . . .  D ADDR   0030H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

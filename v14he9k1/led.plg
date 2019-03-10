@@ -1,0 +1,21 @@
+<html>
+<body>
+<pre>
+<h1>µVision2 Build Log</h1>
+<h2>Project:</h2>
+V:\v14he9k1\led.uv2
+Project File Date:  10/05/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling uart.c...
+compiling main.c...
+compiling delay.c...
+compiling i2c.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_RX?UART
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCD2DEC?MAIN
+Program Size: data=45.1 xdata=0 code=2247
+"led" - 0 Error(s), 2 Warning(s).

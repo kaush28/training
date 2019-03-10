@@ -1,0 +1,32 @@
+A51 MACRO ASSEMBLER  B_5                                                                  08/31/2015 23:23:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN B_5.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE B_5.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+0000 752A15            2     MOV 2AH,#15H
+0003 E52A              3     MOV A,2AH
+0005 44F0              4     ORL A,#0F0H
+0007 F4                5     CPL A
+0008 532AF0            6     ANL 2AH,#0F0H
+000B 422A              7     ORL 2AH,A
+                       8     END
+                             
+A51 MACRO ASSEMBLER  B_5                                                                  08/31/2015 23:23:46 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,44 @@
+C51 COMPILER V7.08   SPI1                                                                  09/23/2015 13:06:14 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE SPI1
+OBJECT MODULE PLACED IN C:\ISP\spi1.obj
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE spi1.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\ISP\spi1.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include"types.h"
+   3          #include"delay.h"
+   4          
+   5          sbit clk=P3^0;
+   6          sbit dout=P3^1;
+   7          sbit din=P3^2;
+   8          
+   9          u8 spi1(u8 dat)
+  10          {
+  11   1      u8 i, buff=0;
+  12   1      for(i=0;i<8;i++)
+  13   1      {
+  14   2      clk=0;
+  15   2      din=dat&(0x80>>i)?1:0;
+  16   2      if(dout)
+  17   2      buff|=(0x80)>>i;
+  18   2      clk=1;
+  19   2      }
+  20   1      return buff;
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     62    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

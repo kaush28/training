@@ -1,0 +1,33 @@
+A51 MACRO ASSEMBLER  XCH                                                                  08/31/2015 23:14:26 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN XCH.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE XCH.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+0000 7D72              2     MOV R5,#72H
+0002 7E91              3     MOV R6,#91H
+0004 53050F            4     ANL 05,#00FH
+0007 EE                5     MOV A,R6
+0008 C4                6     SWAP A
+0009 440F              7     ORL A,#0FH
+000B F4                8     CPL A
+000C 4205              9     ORL 05H,A
+                      10     END
+A51 MACRO ASSEMBLER  XCH                                                                  08/31/2015 23:14:26 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

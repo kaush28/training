@@ -1,0 +1,51 @@
+C51 COMPILER V7.08   MCP3204                                                               09/23/2015 13:06:13 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE MCP3204
+OBJECT MODULE PLACED IN C:\ISP\mcp3204.obj
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE mcp3204.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\ISP\mcp3204.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include"types.h"
+   3          #include"delay.h"
+   4          #include"spi1.h"
+   5          
+   6          sbit clk=P3^0;
+   7          sbit dout=P3^1;
+   8          sbit din=P3^2;
+   9          sbit _cs=P3^3;
+  10          
+  11          float adc_mcp3204(u8 chno)
+  12          {
+  13   1      u16 byte1=0,byte2=0;
+  14   1      u16 adc_val=0;
+  15   1      chno<<=6;
+  16   1      
+  17   1      _cs=0;
+  18   1      
+  19   1      spi1(6);
+  20   1      byte1=spi1(chno);
+  21   1      byte2=spi1(0);
+  22   1      
+  23   1      _cs=1;
+  24   1      
+  25   1      adc_val=((byte1&0x0f)<<8)|byte2;
+  26   1      
+  27   1      return(adc_val*(5.0/4095));
+  28   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     70    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,71 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        09/12/2015  11:52:01  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\KEIL2\C51\BIN\BL51.EXE eg.obj TO EXE
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  eg.obj (EG)
+  C:\KEIL2\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  EXE (EG)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0018H                  *** GAP ***
+            DATA    0020H     000AH     BIT_ADDR     ?BA?EG
+            IDATA   002AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0018H     UNIT         ?PR?MAIN?EG
+            CODE    001BH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   EXE (EG)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?EG
+
+
+
+SYMBOL TABLE OF MODULE:  EXE (EG)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        EG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0003H         PUBLIC        main
+  D:0020H         PUBLIC        x
+  -------         PROC          MAIN
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         2
+  C:0003H         LINE#         3
+  C:0003H         LINE#         5
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/12/2015  11:52:01  PAGE 2
+
+
+  C:0007H         LINE#         6
+  C:001AH         LINE#         7
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        EG
+
+Program Size: data=19.0 xdata=0 code=39
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

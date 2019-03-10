@@ -1,0 +1,30 @@
+A51 MACRO ASSEMBLER  B_8                                                                  08/31/2015 23:53:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN B_8.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE B_8.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+0000 74FF              2     MOV A,#0FFH
+0002 540F              3     ANL A,#0FH
+0004 F53C              4     MOV 3CH,A
+0006 C4                5     SWAP A
+0007 423C              6     ORL 3CH,A
+                       7     END
+A51 MACRO ASSEMBLER  B_8                                                                  08/31/2015 23:53:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

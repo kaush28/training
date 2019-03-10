@@ -1,0 +1,138 @@
+C51 COMPILER V7.08   SPI                                                                   09/21/2015 12:38:57 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE SPI
+OBJECT MODULE PLACED IN C:\ISP\spi.obj
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE spi.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\ISP\spi.obj)
+
+line level    source
+
+   1          #include"types.h"
+   2          
+   3          
+   4          
+   5          #include<reg51.h>
+   6          
+   7          
+   8          sfr p2=0xa0;
+   9          /*
+  10          sbit clk=P3^0;
+  11          sbit din=P3^2;
+  12          sbit dout=P3^1;
+  13          sbit _cs=P3^3;
+  14          
+  15          float spi(u16 chno)
+  16          {
+  17          u8 i;
+  18          u16 adc_val=0;
+  19          bit d1,d0;
+  20          
+  21          if(chno==0)
+  22          {
+  23          d1=d0=0;
+  24          }
+  25          else if(chno==1)
+  26          {
+  27          d1=0;
+  28          d0=1;
+  29          }
+  30          else if(chno==2)
+  31          {
+  32          d1=1;
+  33          d0=0;
+  34          }
+  35          else if(chno==3)
+  36          {
+  37          d1=d0=1;
+  38          }
+  39          
+  40          //clk=din=dout=_cs=1;
+  41          _cs=
+  42          _cs=0;
+  43          
+  44          clk=0; clk=1;
+  45          
+  46          clk=0; clk=1;
+  47          
+  48          clk=0; clk=1;
+  49          
+  50          clk=0; din=d1; clk=1;
+  51          
+  52          clk=0; din=d0; clk=1;
+  53          
+  54          clk=0; clk=1;
+  55          
+C51 COMPILER V7.08   SPI                                                                   09/21/2015 12:38:57 PAGE 2   
+
+  56          clk=0; clk=1;
+  57          
+  58          for(i=11;i>=0;i--)
+  59          {
+  60          clk=0;
+  61          if(dout)
+  62          {
+  63          adc_val|=1<<i;
+  64          }
+  65          clk=1;
+  66          }
+  67          _cs=1;
+  68          return(adc_val*(5.0/4095));
+  69          }
+  70          
+  71          */
+  72          
+  73          //#include<reg51.h>
+  74          sbit _cs=p2^3;
+  75          sbit miso=p2^5;
+  76          sbit clk=p2^6;
+  77          sbit mosi=p2^4;
+  78          bdata chanNo;
+  79          
+  80          float spi(bit d1,bit d0)
+  81          {
+  82   1      unsigned int adc_val=0;
+  83   1      char i; 
+  84   1      
+  85   1      clk=mosi=1;//start condition for 3204
+  86   1      
+  87   1      _cs=0;
+  88   1      
+  89   1      clk=0;clk=1;//in mcp3201 that extra clock pulse not required
+  90   1       
+  91   1      clk=0;mosi=1;clk=1;// used for single mode not differential mode
+  92   1      
+  93   1      clk=0;mosi=1;clk=1;//d2 which is dont care
+  94   1      clk=0;mosi=d1;clk=1;//d1        d1  d2
+  95   1      clk=0;mosi=d0;clk=1;//d0         0   0   1st channel
+  96   1                         //           0   1   2nd channel likewise 4 channel
+  97   1      clk=0;clk=1;       //sampling the data
+  98   1      clk=0;clk=1;       //for null
+  99   1      for(i=11;i>=0;i--) //for receiving 12 bit information
+ 100   1      {
+ 101   2      clk=0;
+ 102   2      if(miso)
+ 103   2      {
+ 104   3      adc_val|=(1<<i);
+ 105   3      }
+ 106   2      clk=1;
+ 107   2      }
+ 108   1      _cs=1;
+ 109   1      return ((adc_val*5.0)/4095);
+ 110   1      }
+ 111          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    120    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V7.08   SPI                                                                   09/21/2015 12:38:57 PAGE 3   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

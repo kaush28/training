@@ -1,0 +1,118 @@
+A51 MACRO ASSEMBLER  ASSIGN1                                                              09/11/2015 11:02:59 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN ASSIGN1.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE ASSIGN1.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     DSEG AT 30H
+0030                   2     STR: DS 7
+                       3     
+----                   4     CSEG AT 0
+                       5     
+0000 7F02              6     MOV R7,#2
+0002 7E01              7     MOV R6,#1
+0004 7430              8     MOV A,#'0'
+0006 F538              9     MOV 38H,A
+                      10     
+0008                  11     L1:
+0008 EF               12     MOV A,R7
+0009 8EF0             13     MOV B,R6
+000B A4               14     MUL AB
+                      15     ;MOV R1,B
+000C 75F00A           16     MOV B,#10
+000F 84               17     DIV AB
+0010 FA               18     MOV R2,A
+0011 7830             19     MOV R0,#STR
+0013 EF               20     MOV A,R7
+0014 4430             21     ORL A,#'0'
+0016 F6               22     MOV @R0,A
+0017 08               23     INC R0
+0018 7478             24     MOV A,#'x'
+001A F6               25     MOV @R0,A
+001B 08               26     INC R0
+001C EE               27     MOV A,R6
+001D D4               28     DA A
+001E 20E41C           29     JB ACC.4,L2
+                      30     
+0021                  31     L3:
+0021 4430             32     ORL A,#'0'
+0023 F6               33     MOV @R0,A
+0024 F539             34     MOV 39H,A
+0026 08               35     INC R0
+0027 743D             36     MOV A,#'='
+0029 F6               37     MOV @R0,A
+002A 08               38     INC R0
+002B EA               39     MOV A,R2
+002C 4430             40     ORL A,#'0'
+002E F6               41     MOV @R0,A
+002F 08               42     INC R0
+0030 E5F0             43     MOV A,B
+0032 4430             44     ORL A,#'0'
+0034 F6               45     MOV @R0,A
+                      46     
+                      47     
+0035 0E               48     INC R6
+                      49     ;SJMP L1
+0036 114C             50     ACALL DELAY
+0038                  51     L5:
+0038 BE0BCD           52     CJNE R6,#11,L1
+003B 80FE             53     SJMP $
+                      54     
+003D                  55     L2:
+003D FB               56     MOV R3,A
+003E C4               57     SWAP A
+003F 540F             58     ANL A,#0FH
+A51 MACRO ASSEMBLER  ASSIGN1                                                              09/11/2015 11:02:59 PAGE     2
+
+0041 4430             59     ORL A,#'0'
+0043 F6               60     MOV @R0,A
+0044 F538             61     MOV 38H,A
+0046 08               62     INC R0
+0047 EB               63     MOV A,R3
+0048 540F             64     ANL A,#0FH
+004A 80D5             65     SJMP L3
+                      66     
+004C                  67     DELAY:
+004C 7A02             68     MOV R2,#2
+004E                  69     DL3:
+004E 7BFF             70     MOV R3,#255
+0050                  71     DL2:
+0050 7CFF             72     MOV R4,#255
+0052                  73     DL1:
+0052 7DFF             74     MOV R5,#255
+0054 DDFE             75     DJNZ R5,$
+0056 DCFA             76     DJNZ R4,DL1
+0058 DBF6             77     DJNZ R3,DL2
+005A DAF2             78     DJNZ R2,DL3
+005C 80DA             79     SJMP L5
+                      80     ;RET
+                      81     
+                      82     END
+A51 MACRO ASSEMBLER  ASSIGN1                                                              09/11/2015 11:02:59 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   004CH   A   
+DL1. . . . . . . .  C ADDR   0052H   A   
+DL2. . . . . . . .  C ADDR   0050H   A   
+DL3. . . . . . . .  C ADDR   004EH   A   
+L1 . . . . . . . .  C ADDR   0008H   A   
+L2 . . . . . . . .  C ADDR   003DH   A   
+L3 . . . . . . . .  C ADDR   0021H   A   
+L5 . . . . . . . .  C ADDR   0038H   A   
+STR. . . . . . . .  D ADDR   0030H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

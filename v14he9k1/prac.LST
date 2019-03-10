@@ -1,0 +1,91 @@
+A51 MACRO ASSEMBLER  PRAC                                                                 09/07/2015 12:57:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN prac.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE prac.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+                       2     
+0000 112A              3     ACALL DELAY1S   ; 2US
+0002 803C              4     SJMP LAST
+                       5     
+0004                   6     DELAY1MS:       ;1000US
+                       7     
+0004 7FFF              8     MOV R7,#255     ;1US
+0006 DFFE              9     DJNZ R7,$               ;2US*255=510US
+0008 7FF3             10     MOV R7,#243     ;1US
+000A DFFE             11     DJNZ R7,$       ;2US*243=486US
+000C 22               12     RET             ;TOTAL=998US
+                      13     
+000D                  14     DELAY10MS:      ;10000US
+                      15     
+000D 7E09             16     MOV R6,#9       ;1US
+000F                  17     DL1:
+000F 1104             18     ACALL DELAY1MS  ;2US*9=18US+ 9*998=8982==9000
+0011 DEFC             19     DJNZ R6,DL1     ;2US*9=18US
+0013 7E56             20     MOV R6,#86      ;1US
+0015 DEFE             21     DJNZ R6,$       ;2US*86=172US
+                      22     
+0017 22               23     RET
+                      24     
+0018                  25     DELAY100MS:     ;100000US
+                      26     
+0018 7D09             27     MOV R5,#9
+001A                  28     DL2:
+001A 110D             29     ACALL DELAY10MS
+001C DDFC             30     DJNZ R5,DL2
+001E 7D09             31     MOV R5,#9
+0020                  32     DL3:
+0020 1104             33     ACALL DELAY1MS
+0022 DDFC             34     DJNZ R5,DL3
+0024 7D55             35     MOV R5,#85
+0026 DDFE             36     DJNZ R5,$
+0028 00               37     NOP
+0029 22               38     RET
+                      39     
+002A                  40     DELAY1S:
+002A 7C09             41     MOV R4,#9
+002C                  42     DL4:
+002C 1118             43     ACALL DELAY100MS
+002E DCFC             44     DJNZ R4,DL4
+0030 7C09             45     MOV R4,#9
+0032                  46     DL5:
+0032 110D             47     ACALL DELAY10MS
+0034 DCFC             48     DJNZ R4,DL5
+0036 7C09             49     MOV R4,#9
+0038                  50     DL6:
+0038 1104             51     ACALL DELAY1MS
+003A DCFC             52     DJNZ R4,DL6
+003C 7C57             53     MOV R4,#87
+003E DCFE             54     DJNZ R4,$
+                      55     
+0040                  56     LAST:
+                      57     END
+A51 MACRO ASSEMBLER  PRAC                                                                 09/07/2015 12:57:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY100MS . . . .  C ADDR   0018H   A   
+DELAY10MS. . . . .  C ADDR   000DH   A   
+DELAY1MS . . . . .  C ADDR   0004H   A   
+DELAY1S. . . . . .  C ADDR   002AH   A   
+DL1. . . . . . . .  C ADDR   000FH   A   
+DL2. . . . . . . .  C ADDR   001AH   A   
+DL3. . . . . . . .  C ADDR   0020H   A   
+DL4. . . . . . . .  C ADDR   002CH   A   
+DL5. . . . . . . .  C ADDR   0032H   A   
+DL6. . . . . . . .  C ADDR   0038H   A   
+LAST . . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

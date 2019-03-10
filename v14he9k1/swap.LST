@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  SWAP                                                                 09/02/2015 10:31:42 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN swap.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE swap.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+0000 7F0F              2     MOV R7,#0FH
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+0002 EF               14     MOV A,R7
+0003 5480             15     ANL A,#80H
+0005 23               16     RL A
+0006 F8               17     MOV R0,A
+0007 EF               18     MOV A,R7
+0008 5401             19     ANL A,#01H
+000A 03               20     RR A
+000B 4500             21     ORL A,00H
+000D 53077E           22     ANL 07H,#7EH
+0010 4207             23     ORL 07H,A
+                      24     END
+                             
+A51 MACRO ASSEMBLER  SWAP                                                                 09/02/2015 10:31:42 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

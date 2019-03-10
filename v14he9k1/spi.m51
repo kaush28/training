@@ -1,0 +1,326 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        09/23/2015  12:31:05  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\KEIL2\C51\BIN\BL51.EXE C:\ISP\main.obj, C:\ISP\delay.obj, C:\ISP\lcd.obj, C:\ISP\mcp3204.obj, C:\ISP\spi1.obj TO C:\I
+>> SP\spi PRINT (.\spi.m51)
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  C:\ISP\main.obj (MAIN)
+  C:\ISP\delay.obj (DELAY)
+  C:\ISP\lcd.obj (LCD)
+  C:\ISP\mcp3204.obj (MCP3204)
+  C:\ISP\spi1.obj (SPI1)
+  C:\KEIL2\C51\LIB\C51FPS.LIB (?C?FPADD)
+  C:\KEIL2\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  C:\KEIL2\C51\LIB\C51FPS.LIB (?C?FCAST)
+  C:\KEIL2\C51\LIB\C51FPS.LIB (?C?CASTF)
+  C:\KEIL2\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  C:\KEIL2\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL2\C51\LIB\C51S.LIB (?C?COPY)
+  C:\KEIL2\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL2\C51\LIB\C51S.LIB (?C?LNEG)
+
+
+LINK MAP OF MODULE:  C:\ISP\spi (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?_LCD_INT?LCD
+            DATA    0010H     0006H     UNIT         ?DT?_LCD_FLOAT?LCD
+            DATA    0016H     0003H     UNIT         ?DT?_ADC_MCP3204?MCP3204
+            IDATA   0019H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0416H     UNIT         ?C?LIB_CODE
+            CODE    0419H     006BH     UNIT         ?PR?_LCD_INT?LCD
+            CODE    0484H     0066H     UNIT         ?PR?_LCD_FLOAT?LCD
+            CODE    04EAH     0046H     UNIT         ?PR?_ADC_MCP3204?MCP3204
+            CODE    0530H     003EH     UNIT         ?PR?_SPI1?SPI1
+            CODE    056EH     0037H     UNIT         ?PR?LCD_INIT?LCD
+            CODE    05A5H     0013H     UNIT         ?PR?_DELAY?DELAY
+            CODE    05B8H     000DH     UNIT         ?PR?_LCD_WRITE?LCD
+            CODE    05C5H     000CH     UNIT         ?C_C51STARTUP
+            CODE    05D1H     0008H     UNIT         ?PR?MAIN?MAIN
+            CODE    05D9H     0005H     UNIT         ?PR?_LCD_CHAR?LCD
+            CODE    05DEH     0005H     UNIT         ?PR?_LCD_CMD?LCD
+            CODE    05E3H     0005H     UNIT         ?CO?LCD
+
+
+
+OVERLAY MAP OF MODULE:   C:\ISP\spi (MAIN)
+
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/23/2015  12:31:05  PAGE 2
+
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?LCD_INIT?LCD
+  +--> ?PR?_LCD_CHAR?LCD
+
+?PR?LCD_INIT?LCD
+  +--> ?PR?_DELAY?DELAY
+  +--> ?PR?_LCD_CMD?LCD
+
+?PR?_LCD_CMD?LCD
+  +--> ?PR?_LCD_WRITE?LCD
+
+?PR?_LCD_WRITE?LCD
+  +--> ?PR?_DELAY?DELAY
+
+?PR?_LCD_CHAR?LCD
+  +--> ?PR?_LCD_WRITE?LCD
+
+
+
+SYMBOL TABLE OF MODULE:  C:\ISP\spi (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:05D1H         PUBLIC        main
+  -------         PROC          MAIN
+  C:05D1H         LINE#         6
+  C:05D1H         LINE#         7
+  C:05D1H         LINE#         8
+  C:05D4H         LINE#         9
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:05A5H         PUBLIC        _delay
+  -------         PROC          _DELAY
+  D:0007H         SYMBOL        dly
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0005H         SYMBOL        j
+  -------         ENDDO         
+  C:05A5H         LINE#         3
+  C:05A5H         LINE#         4
+  C:05A5H         LINE#         6
+  C:05ACH         LINE#         7
+  C:05ACH         LINE#         8
+  C:05B0H         LINE#         9
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/23/2015  12:31:05  PAGE 3
+
+
+  C:05B4H         LINE#         10
+  C:05B7H         LINE#         11
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        LCD
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  C:0484H         PUBLIC        _lcd_float
+  C:05D9H         PUBLIC        _lcd_char
+  C:05B8H         PUBLIC        _lcd_write
+  C:05DEH         PUBLIC        _lcd_cmd
+  C:0419H         PUBLIC        _lcd_int
+  C:05E3H         SYMBOL        _?ix1000
+  C:056EH         PUBLIC        lcd_init
+  B:00A0H.2       PUBLIC        en
+  B:00A0H.0       PUBLIC        rs
+  B:00A0H.1       PUBLIC        rw
+  -------         PROC          _LCD_WRITE
+  D:0007H         SYMBOL        val
+  C:05B8H         LINE#         11
+  C:05B8H         LINE#         12
+  C:05B8H         LINE#         13
+  C:05BAH         LINE#         14
+  C:05BCH         LINE#         15
+  C:05BEH         LINE#         16
+  C:05C0H         LINE#         17
+  -------         ENDPROC       _LCD_WRITE
+  -------         PROC          _LCD_CHAR
+  D:0007H         SYMBOL        ch
+  C:05D9H         LINE#         20
+  C:05D9H         LINE#         21
+  C:05D9H         LINE#         22
+  C:05DBH         LINE#         23
+  -------         ENDPROC       _LCD_CHAR
+  -------         PROC          _LCD_CMD
+  D:0007H         SYMBOL        val
+  C:05DEH         LINE#         26
+  C:05DEH         LINE#         27
+  C:05DEH         LINE#         28
+  C:05E0H         LINE#         29
+  -------         ENDPROC       _LCD_CMD
+  -------         PROC          LCD_INIT
+  C:056EH         LINE#         32
+  C:056EH         LINE#         33
+  C:056EH         LINE#         34
+  C:0573H         LINE#         35
+  C:0578H         LINE#         36
+  C:057DH         LINE#         37
+  C:0582H         LINE#         38
+  C:0587H         LINE#         39
+  C:058CH         LINE#         40
+  C:0591H         LINE#         41
+  C:0596H         LINE#         42
+  C:059BH         LINE#         43
+  C:05A0H         LINE#         44
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/23/2015  12:31:05  PAGE 4
+
+
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          _LCD_INT
+  D:0008H         SYMBOL        no
+  -------         DO            
+  D:000AH         SYMBOL        i
+  D:000BH         SYMBOL        a
+  -------         ENDDO         
+  C:0419H         LINE#         48
+  C:041DH         LINE#         49
+  C:041DH         LINE#         51
+  C:0430H         LINE#         52
+  C:0436H         LINE#         53
+  C:043BH         LINE#         55
+  C:043EH         LINE#         56
+  C:043EH         LINE#         57
+  C:0454H         LINE#         58
+  C:0463H         LINE#         59
+  C:046AH         LINE#         60
+  C:0475H         LINE#         61
+  C:0475H         LINE#         62
+  C:047FH         LINE#         63
+  C:0483H         LINE#         64
+  -------         ENDPROC       _LCD_INT
+  -------         PROC          _LCD_FLOAT
+  D:0010H         SYMBOL        f
+  -------         DO            
+  D:0014H         SYMBOL        t
+  -------         ENDDO         
+  C:0484H         LINE#         66
+  C:048CH         LINE#         67
+  C:048CH         LINE#         69
+  C:0493H         LINE#         70
+  C:0496H         LINE#         71
+  C:049BH         LINE#         72
+  C:04CEH         LINE#         73
+  C:04E0H         LINE#         74
+  C:04E7H         LINE#         75
+  -------         ENDPROC       _LCD_FLOAT
+  -------         ENDMOD        LCD
+
+  -------         MODULE        MCP3204
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00B0H         PUBLIC        P3
+  B:00B0H.3       PUBLIC        _cs
+  C:04EAH         PUBLIC        _adc_mcp3204
+  -------         PROC          _ADC_MCP3204
+  D:0016H         SYMBOL        chno
+  -------         DO            
+  D:0017H         SYMBOL        byte1
+  D:0004H         SYMBOL        byte2
+  D:0006H         SYMBOL        adc_val
+  -------         ENDDO         
+  C:04EAH         LINE#         11
+  C:04ECH         LINE#         12
+  C:04ECH         LINE#         13
+  C:04F3H         LINE#         14
+  C:04F4H         LINE#         15
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/23/2015  12:31:05  PAGE 5
+
+
+  C:04FDH         LINE#         17
+  C:04FFH         LINE#         19
+  C:0504H         LINE#         20
+  C:050EH         LINE#         21
+  C:0515H         LINE#         23
+  C:0517H         LINE#         25
+  C:051EH         LINE#         27
+  C:052FH         LINE#         28
+  -------         ENDPROC       _ADC_MCP3204
+  -------         ENDMOD        MCP3204
+
+  -------         MODULE        SPI1
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00B0H         PUBLIC        P3
+  B:00B0H.0       PUBLIC        clk
+  B:00B0H.2       PUBLIC        din
+  B:00B0H.1       PUBLIC        dout
+  C:0530H         PUBLIC        _spi1
+  -------         PROC          _SPI1
+  D:0001H         SYMBOL        dat
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0005H         SYMBOL        buff
+  -------         ENDDO         
+  C:0530H         LINE#         9
+  C:0532H         LINE#         10
+  C:0532H         LINE#         11
+  C:0534H         LINE#         12
+  C:0535H         LINE#         13
+  C:0535H         LINE#         14
+  C:0537H         LINE#         15
+  C:0555H         LINE#         16
+  C:0558H         LINE#         17
+  C:0565H         LINE#         18
+  C:0567H         LINE#         19
+  C:056BH         LINE#         20
+  C:056DH         LINE#         21
+  -------         ENDPROC       _SPI1
+  -------         ENDMOD        SPI1
+
+  -------         MODULE        ?C?FPADD
+  C:000AH         PUBLIC        ?C?FPADD
+  C:0006H         PUBLIC        ?C?FPSUB
+  -------         ENDMOD        ?C?FPADD
+
+  -------         MODULE        ?C?FPMUL
+  C:00FBH         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FCAST
+  C:020BH         PUBLIC        ?C?FCASTC
+  C:0206H         PUBLIC        ?C?FCASTI
+  C:0201H         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:023FH         PUBLIC        ?C?CASTF
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/23/2015  12:31:05  PAGE 6
+
+
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?COPY
+  C:0390H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?UIDIV
+  C:03B6H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?LNEG
+  C:040BH         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD_FLOAT?LCD
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_ADC_MCP3204?MCP3204
+
+Program Size: data=26.0 xdata=0 code=1512
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

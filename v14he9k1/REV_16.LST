@@ -1,0 +1,42 @@
+A51 MACRO ASSEMBLER  REV_16                                                               09/02/2015 11:25:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN REV_16.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE REV_16.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+0000 7800              2     MOV R0,#00H
+0002 79FF              3     MOV R1,#0FFH
+0004 E9                4     MOV A,R1
+0005 33                5     RLC A
+0006 9200              6     MOV 20H.0,C
+0008 E8                7     MOV A,R0
+0009 33                8     RLC A
+000A 5300FE            9     ANL 00H,#0FEH
+000D E8               10     MOV A,R0
+000E 4520             11     ORL A,20H
+0010 F8               12     MOV R0,A
+0011 9200             13     MOV 20H.0,C
+0013 E9               14     MOV A,R1
+0014 54FE             15     ANL A,#0FEH
+0016 4520             16     ORL A,20H
+0018 F9               17     MOV R1,A
+                      18     END
+                             
+A51 MACRO ASSEMBLER  REV_16                                                               09/02/2015 11:25:04 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

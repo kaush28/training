@@ -1,0 +1,39 @@
+A51 MACRO ASSEMBLER  PORT                                                                 08/31/2015 23:00:01 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN port.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE port.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     CSEG AT 0
+0000 7845              2     MOV R0,#45H
+0002 7973              3     MOV R1,#73H
+0004 E8                4     MOV A,R0
+0005 C4                5     SWAP A
+0006 F8                6     MOV R0,A
+0007 E9                7     MOV A,R1
+0008 C4                8     SWAP A
+0009 7900              9     MOV R1,#00H
+000B D7               10     XCHD A,@R1
+000C C4               11     SWAP A
+000D F9               12     MOV R1,A
+000E E8               13     MOV A,R0
+000F C4               14     SWAP A
+0010 F8               15     MOV R0,A
+                      16     END
+A51 MACRO ASSEMBLER  PORT                                                                 08/31/2015 23:00:01 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

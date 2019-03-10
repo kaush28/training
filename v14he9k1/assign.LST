@@ -1,0 +1,87 @@
+A51 MACRO ASSEMBLER  ASSIGN                                                               09/10/2015 17:15:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.08a
+OBJECT MODULE PLACED IN assign.OBJ
+ASSEMBLER INVOKED BY: C:\Keil2\C51\BIN\A51.EXE assign.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     DSEG AT 30H
+0030                   2     STR: DS 6
+                       3     
+----                   4     CSEG AT 0
+0000 7F02              5     MOV R7,#2
+0002 7E01              6     MOV R6,#1
+                       7     
+                       8     
+0004                   9     L1:
+0004 EF               10     MOV A,R7
+0005 8EF0             11     MOV B,R6
+0007 A4               12     MUL AB
+0008 F9               13     MOV R1,A
+0009 7830             14     MOV R0,#STR
+000B EF               15     MOV A,R7
+000C 4430             16     ORL A,#'0'
+000E F6               17     MOV @R0,A
+000F 08               18     INC R0
+0010 7478             19     MOV A,#'x'
+0012 F6               20     MOV @R0,A
+0013 08               21     INC R0
+0014 EE               22     MOV A,R6
+0015 4430             23     ORL A,#'0'
+0017 F6               24     MOV @R0,A
+0018 08               25     INC R0
+0019 743D             26     MOV A,#'='
+001B F6               27     MOV @R0,A
+                      28     ;INC R0
+001C E5F0             29     MOV A,B
+001E 4430             30     ORL A,#'0'
+                      31     ;MOV @R0,A
+                      32     ;INC R0
+0020 E9               33     MOV A,R1
+0021 D4               34     DA A      
+0022 20E40A           35     JB ACC.4,L2
+                      36     ;SJMP L2
+                      37     
+0025                  38     L3:
+0025 08               39     INC R0
+                      40     ;INC B
+                      41     ;MOV A,B                         
+0026 4430             42     ORL A,#'0'
+0028 F6               43     MOV @R0,A
+0029 0E               44     INC R6
+002A BE0BD7           45     CJNE R6,#11,L1
+002D 80FE             46     SJMP $
+                      47     
+                      48     
+002F                  49     L2:
+002F 08               50     INC R0
+0030 FD               51     MOV R5,A
+0031 05F0             52     INC B
+0033 E5F0             53     MOV A,B
+0035 4430             54     ORL A,#'0'
+0037 F6               55     MOV @R0,A
+0038 ED               56     MOV A,R5
+0039 80EA             57     SJMP L3
+                      58     END
+A51 MACRO ASSEMBLER  ASSIGN                                                               09/10/2015 17:15:46 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+L1 . . . . . . . .  C ADDR   0004H   A   
+L2 . . . . . . . .  C ADDR   002FH   A   
+L3 . . . . . . . .  C ADDR   0025H   A   
+STR. . . . . . . .  D ADDR   0030H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

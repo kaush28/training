@@ -1,0 +1,74 @@
+C51 COMPILER V7.08   UART                                                                  10/06/2015 13:28:28 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN C:\New Folder (27)\uart.obj
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE uart.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\New Folder (27)\uart.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include"types.h"
+   3          #include<stdio.h>
+   4          
+   5          #define STDIO_LIB 1
+   6          #define DOUBLE_BAUD 0
+   7          
+   8          #define BAUD 9600
+   9          #define XTAL 11.0592
+  10          #define LOADVAL (256-((XTAL/(12*32)/BAUD)*1000*1000))
+  11          
+  12          void init_uart(void)
+  13          {
+  14   1      SCON=0x50;
+  15   1      TMOD=0x20;
+  16   1      TH1=TL1=LOADVAL;
+  17   1      
+  18   1      #if DOUBLE_BAUD>0
+              PCON=0x80;
+              #endif
+  21   1      
+  22   1      #if STDIO_LIB >0
+  23   1      TI=1;
+  24   1      #endif
+  25   1      
+  26   1      
+  27   1      TR1=1;
+  28   1      }
+  29          
+  30          void uart_tx(u8 dat)
+  31          {
+  32   1      SBUF=dat;
+  33   1      TI=0;
+  34   1      while(TI==0);
+  35   1      TI=0;
+  36   1      }
+  37          
+  38          u8 uart_rx(void)
+  39          {
+  40   1      while(RI==0);
+  41   1      RI=0;
+  42   1      return SBUF;
+  43   1      }
+  44          
+  45          void str_tx(u8 *s)
+  46          {
+  47   1              while(*s)
+  48   1                      uart_tx(*s++);
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     72    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V7.08   UART                                                                  10/06/2015 13:28:28 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

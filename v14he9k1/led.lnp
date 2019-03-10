@@ -1,0 +1,6 @@
+"uart.obj",
+"main.obj",
+"delay.obj",
+"i2c.obj" 
+TO "led" 
+RAMSIZE(256) 

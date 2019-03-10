@@ -1,0 +1,40 @@
+C51 COMPILER V7.08   LED                                                                   09/14/2015 11:42:31 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN C:\0000\led.obj
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE led.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\0000\led.obj)
+
+line level    source
+
+   1          #include"types.h"
+   2          #include"reg51.h"
+   3          #include"delay.h"
+   4          
+   5          #define LED_PORT P2
+   6          
+   7          void led_display(u16 i)
+   8          {
+   9   1      //while(1)
+  10   1      //{
+  11   1      LED_PORT=0x0f;
+  12   1      //delay(1000);
+  13   1      //LED_PORT=0x00;
+  14   1      //delay(1000);
+  15   1      LED_PORT^=i;
+  16   1      //}
+  17   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      7    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
