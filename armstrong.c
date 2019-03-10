@@ -1,0 +1,21 @@
+#include<stdio.h>
+main()
+{
+int a,b,c,sum=0;
+for(a=1;a<=500;a++)
+{
+sum=0;
+b=a;
+while(b>0)
+{
+c=b%10;
+sum=sum+(c*c*c);
+b=b/10;
+}
+if(sum==a)
+{
+printf("%d,",a);
+}
+}
+printf("\n");
+}
