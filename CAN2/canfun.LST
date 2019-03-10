@@ -1,0 +1,152 @@
+C51 COMPILER V9.02   CANFUN                                                                10/20/2015 05:52:17 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE CANFUN
+OBJECT MODULE PLACED IN C:\v14he9m8\canfun.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE canfun.c BROWSE DEBUG OBJECTEXTEND OBJECT(C:\v14he9m8\canfun.obj)
+
+line level    source
+
+   1          #include"headers.h"
+   2          u8 flg;
+   3          extern u8 ch;
+   4          
+   5          //structure to hold the ID and data for receive data
+   6          
+   7          struct _RXBX_Buffer
+   8          {
+   9                  u8 IS_RTR; //remote transmitt bit
+  10                  u16 RX_ID; //ID
+  11                  u8 RX_Len; //to hold the data length
+  12                  u8 RXBnD0; //to hold revd data
+  13                  u8 RX_Data[8];
+  14          }RXBX_Buffer;
+  15          
+  16          /* ISR ROUTINE */
+  17          void EXTINT0(void)interrupt 0
+  18          {
+  19   1              flg=1;
+  20   1              IE0=0; //clear interrupt
+  21   1      }
+  22          
+  23          /* INTERRUPT INITIALIZATION FUNCTION*/
+  24          
+  25          void init_ext(void)
+  26          {
+  27   1              IEN0|=0x81;
+  28   1              IT0=1;
+  29   1      }
+  30          
+  31          //delay routine for MCP2515 after reset
+  32          void RSTDelay_CANCONTROLLER(void)
+  33          {
+  34   1              u8 i;
+  35   1              for(i=70;i>0;i--);//delay for 140us
+  36   1      }
+  37          
+  38          void init_CANCONTROLLER(void)
+  39          {
+  40   1              u8 Test_Char;
+  41   1              Init_SPI();
+  42   1              init_ext();
+  43   1              CMD_2515(CMD_RESET);//sending the reset command to the mcp2515
+  44   1              RSTDelay_CANCONTROLLER();//min reset delay for 2us
+  45   1              modify_2515(CANCTRL,MODE_MASK,MODE_CONFIG);//setting the mcp2515 n configure mode
+  46   1              modify_2515(CANCTRL,CLK_MASK,CLK_BITS);
+  47   1              //setting the configuration bits based on bit timming
+  48   1              BW_2515(CNF1,BRP_BITS);
+  49   1              BW_2515(CNF2,CONFIG_PSPH1);
+  50   1              BW_2515(CNF3,CONFIG_PH2);
+  51   1              BW_2515(CANINTE,INT_ENABLE); //enabling the interrupts
+  52   1              //enabling the receive buffer contrl register
+  53   1              BW_2515(RXB0CTRL,RxBuf0_Mode);
+  54   1              BW_2515(RXB1CTRL,RxBuf1_Mode);
+  55   1              modify_2515(BFPCTRL,RXPINENABLE_MASK,RXPINENABLE);
+C51 COMPILER V9.02   CANFUN                                                                10/20/2015 05:52:17 PAGE 2   
+
+  56   1              //checking loopback mode
+  57   1              do
+  58   1              {
+  59   2                      modify_2515(CANCTRL,MODE_MASK,MODE_LOOPBACK);
+  60   2      //set to loopback mode
+  61   2          Test_Char=BR_2515(CANSTAT);
+  62   2          Test_Char&=MODE_MASK;               
+  63   2              }while(Test_Char!=MODE_LOOPBACK);
+  64   1              modify_2515(CANCTRL,MODE_MASK,MODE_NORMAL);
+  65   1      }
+  66          
+  67          //functon used to read data to be received by mcp2515 and update the _RXBX_Buffer
+  68          void RdBuf_2515(struct _RXBX_Buffer*RXBn_Buffer)
+  69          {
+  70   1              u8 Res,Tmp_RXBnCTRL,i;
+  71   1              if(RXBn_Buffer->RXBnD0==RXB0D0)
+  72   1              {
+  73   2                      RXBn_Buffer->RX_Len=BR_2515(RXB0DLC);
+  74   2                      Res=BR_2515(RXB0SIDH);
+  75   2                      RXBn_Buffer->RX_ID=(int)Res*8;
+  76   2                      Res=BR_2515(RXB0SIDL);
+  77   2                      Res>>=5;
+  78   2                      Res&=0x07;
+  79   2                      RXBn_Buffer->RX_ID+=Res;
+  80   2                      Tmp_RXBnCTRL=BR_2515(RXB0CTRL);
+  81   2              }               
+  82   1              else
+  83   1              {
+  84   2                      RXBn_Buffer->RX_Len=BR_2515(RXB1DLC);
+  85   2                      Res=BR_2515(RXB1SIDH);
+  86   2                      RXBn_Buffer->RX_ID=(int)Res*8;
+  87   2                      Res=BR_2515(RXB1SIDL);
+  88   2                      Res>>=5;
+  89   2                      Res&=0x07;
+  90   2                      RXBn_Buffer->RX_ID+=Res;
+  91   2                      Tmp_RXBnCTRL=BR_2515(RXB1CTRL);
+  92   2              }
+  93   1              if(Tmp_RXBnCTRL & 0x08)
+  94   1                      RXBn_Buffer->IS_RTR=1;
+  95   1              else
+  96   1                      RXBn_Buffer->IS_RTR=0;
+  97   1              RXBn_Buffer->RX_Len &=0x0f;//get the actual length
+  98   1              if(RXBn_Buffer->IS_RTR==0)
+  99   1              {
+ 100   2               cs=0;
+ 101   2               Res=SPI(CMD_READ);
+ 102   2               Res=SPI(RXBn_Buffer->RXBnD0);
+ 103   2               for(i=0;i<RXBn_Buffer->RX_Len;i++)
+ 104   2               {
+ 105   3                Res=SPI(0xff);
+ 106   3                RXBn_Buffer->RX_Data[i]=Res;
+ 107   3               }
+ 108   2               cs=1;
+ 109   2              }
+ 110   1              
+ 111   1      }
+ 112          
+ 113          //CAN RXing FUNCTION
+ 114          void CAN_Rx(void)
+ 115          {
+ 116   1              
+ 117   1              modify_2515(CANINTF,0x07,0x00);//clearing the interrupts
+C51 COMPILER V9.02   CANFUN                                                                10/20/2015 05:52:17 PAGE 3   
+
+ 118   1              while(flg==0)
+ 119   1               RXBX_Buffer.RXBnD0=RXB0D0;
+ 120   1              RdBuf_2515(&RXBX_Buffer);
+ 121   1              flg=0;
+ 122   1              if(RXBX_Buffer.IS_RTR==0)
+ 123   1            ch=RXBX_Buffer.RX_Data[0];
+ 124   1              
+ 125   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    493    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
